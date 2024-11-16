@@ -13,7 +13,9 @@ router.get('/agregar', async (request, response) => {
 });
 // Endpoint para agregar un estudiante
 router.post('/agregar', async (request, response) => {
-    // Falta agregar logica
+    const { nombre, apellido, edad, email } = request.body;
+    await queries.agregarEstudiante({ nombre, apellido, edad, email });
+    response.redirect('/estudiantes');
 });
 // Endpoint que permite eliminar un estudiante
 router.get('/eliminar/:idestudiante', async (request, response) => {
