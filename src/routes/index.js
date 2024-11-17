@@ -1,18 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const estudianteRepository = require('../repositories/EstudianteRepository');
-const carreraRepository = require('../repositories/CarreraRepository');
-
-router.get('/', async (req, res) => {
-    const lstEstudiantes = await estudianteRepository.obtenerTodosLosEstudiantes();
-    console.log('Listado',lstEstudiantes);
-    
-router.get('/', async (req, res) => {
-    const lstCarreras = await carreraRepository.obtenerTodasLasCarreras();
-    console.log('Listado',lstCarreras);    
-    
-    res.send('Bienvenido al laboratorio de IMPS'); 
-});
+const EstudianteRepository = require('../repositories/EstudianteRepository');
+const { isLoggedIn } = require('../lib/auth');
+// Configuracion de ruta inicial de la aplicacion
+router.get('/', isLoggedIn, async (request,response) => {
+response.render('home/home');
 });
 
 module.exports = router;
